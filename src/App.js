@@ -70,9 +70,9 @@ class App extends React.Component {
       this.setState({ message: 'Game over. Please start a new game.' });
     }
   }
-  
+
+  //Check only if row is 3 or greater
   checkVertical(board) {
-    // Check only if row is 3 or greater
     for (let r = 3; r < 6; r++) {
       for (let c = 0; c < 7; c++) {
         if (board[r][c]) {
@@ -86,8 +86,8 @@ class App extends React.Component {
     }
   }
   
+  // Check only if column is 3 or less
   checkHorizontal(board) {
-    // Check only if column is 3 or less
     for (let r = 0; r < 6; r++) {
       for (let c = 0; c < 4; c++) {
         if (board[r][c]) {
@@ -101,6 +101,7 @@ class App extends React.Component {
     }
   }
   
+  //checks if the board has no possible solutions therfore it is a draw
   checkDraw(board) {
     for (let r = 0; r < 6; r++) {
       for (let c = 0; c < 7; c++) {
@@ -112,6 +113,7 @@ class App extends React.Component {
     return 'draw';    
   }
   
+  //checks if there is a player that won vertically, horizontally, or if there was a draw
   checkAll(board) {
     return this.checkVertical(board) || this.checkHorizontal(board) || this.checkDraw(board);
   }
@@ -120,6 +122,7 @@ class App extends React.Component {
     this.initBoard();
   }
   
+  //function to click the buttons on the screen 
   render() {
     return (
       <div>
@@ -139,7 +142,7 @@ class App extends React.Component {
   }
 }
 
-// Row component
+//function for the row
 const Row = ({ row, play }) => {
   return (
     <tr>
@@ -148,6 +151,7 @@ const Row = ({ row, play }) => {
   );
 };
 
+//function to see whether the player will be yellow or red
 const Cell = ({ value, columnIndex, play }) => {
   let color = 'white';
   if (value === 1) {
@@ -155,7 +159,8 @@ const Cell = ({ value, columnIndex, play }) => {
   } else if (value === 2) {
     color = 'yellow';
   }
-    
+  
+  //returns the colour when you click on the board
   return (
     <td>
       <div className="cell" onClick={() => {play(columnIndex)}}>
